@@ -1,0 +1,25 @@
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet  author="sick-sequence-v.1.0"  id="createSequence-example">
+        <addAutoIncrement
+                columnName="sick_id"
+                tableName="sicks"
+                startWith="1"
+                incrementBy="1"
+                columnDataType="INTEGER"/>
+    </changeSet>
+
+    <changeSet id="role-populate-v.1.0" author="Alexandr Krylov">
+        <loadData
+                file="db/data/sick-data.csv"
+                tableName="sicks"
+                separator=",">
+            <column name="sick_name" type="string"/>
+            <column name="stage_sick" type="string"/>
+        </loadData>
+    </changeSet>
+
+</databaseChangeLog>

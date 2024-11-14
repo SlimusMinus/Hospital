@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <include file="create/v.1.0.create-client-table.xml" relativeToChangelogFile="true"/>
+    <include file="create/v.1.0.create-sick-table.xml" relativeToChangelogFile="true"/>
+    <include file="create/v.1.0.create-doctor-table.xml" relativeToChangelogFile="true"/>
+    <include file="populate/v.1.0.populate-client-table.xml" relativeToChangelogFile="true"/>
+    <include file="populate/v.1.0.populate-sick-table.xml" relativeToChangelogFile="true"/>
+    <include file="populate/v.1.0.populate-doctor-table.xml" relativeToChangelogFile="true"/>
+
+</databaseChangeLog>
