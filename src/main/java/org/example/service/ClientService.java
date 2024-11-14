@@ -1,14 +1,16 @@
-package service;
+package org.example.service;
 
-import entity.Client;
+import lombok.extern.slf4j.Slf4j;
+import org.example.entity.Client;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import repository.ClientRepository;
+import org.example.repository.ClientRepository;
 
 import java.util.List;
 
 @AllArgsConstructor
 @Service
+@Slf4j
 public class ClientService {
     private ClientRepository clientRepository;
 

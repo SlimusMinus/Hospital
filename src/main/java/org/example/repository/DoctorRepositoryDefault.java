@@ -1,9 +1,13 @@
-package repository;
+package org.example.repository;
 
-import entity.Doctor;
+import lombok.extern.slf4j.Slf4j;
+import org.example.entity.Doctor;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
+@Slf4j
 public class DoctorRepositoryDefault implements DoctorRepository {
     @Override
     public List<Doctor> findAll() {

@@ -1,4 +1,4 @@
-package entity;
+package org.example.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -10,9 +10,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-public class Sick {
+public class Client {
     @Id
-    private int sickId;
-    private String sickName;
-    private String stageSick;
+    private int clientId;
+    private String firstName;
+    private String lastName;
+    private int age;
 }

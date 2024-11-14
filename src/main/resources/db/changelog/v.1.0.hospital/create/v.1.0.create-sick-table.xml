@@ -17,16 +17,4 @@
         </createTable>
     </changeSet>
 
-    <changeSet id="role-constraintName-v.1.1" author="Alexandr Krylov">
-        <preConditions>
-            <not>
-                <foreignKeyConstraintExists foreignKeyName="fk_user_roles_user" schemaName="car_shop"/>
-            </not>
-        </preConditions>
-        <addForeignKeyConstraint baseTableName="user_roles" baseColumnNames="user_id"
-                                 constraintName="fk_user_roles_user" baseTableSchemaName="car_shop"
-                                 referencedTableName="user"  referencedColumnNames="user_id"
-                                 referencedTableSchemaName="car_shop"/>
-    </changeSet>
-
 </databaseChangeLog>

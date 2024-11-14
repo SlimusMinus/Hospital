@@ -1,14 +1,16 @@
-package service;
+package org.example.service;
 
-import entity.Doctor;
+import lombok.extern.slf4j.Slf4j;
+import org.example.entity.Doctor;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import repository.DoctorRepository;
+import org.example.repository.DoctorRepository;
 
 import java.util.List;
 
 @AllArgsConstructor
 @Service
+@Slf4j
 public class DoctorService {
     private DoctorRepository doctorRepository;
 

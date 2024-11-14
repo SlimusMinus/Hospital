@@ -1,12 +1,15 @@
-package repository;
+package org.example.repository;
 
-import entity.Client;
+import lombok.extern.slf4j.Slf4j;
+import org.example.entity.Client;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
+@Slf4j
 public class ClientRepositoryDefault implements ClientRepository {
+
     @Override
     public List<Client> findAll() {
         return List.of();

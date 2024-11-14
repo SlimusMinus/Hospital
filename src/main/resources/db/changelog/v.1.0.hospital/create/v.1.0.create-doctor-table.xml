@@ -25,18 +25,4 @@
         </createTable>
     </changeSet>
 
-    <changeSet id="create-fk_orders_user-v.1.0" author="Alexandr Krylov">
-        <addForeignKeyConstraint baseTableName="orders" baseColumnNames="user_id"
-                                 constraintName="fk_orders_user" baseTableSchemaName="car_shop"
-                                 referencedTableName="user" referencedColumnNames="user_id"
-                                 referencedTableSchemaName="car_shop"/>
-    </changeSet>
-
-    <changeSet id="create-fk_orders_car-v.1.0" author="Alexandr Krylov">
-        <addForeignKeyConstraint baseTableName="orders" baseColumnNames="car_id"
-                                 constraintName="fk_orders_car" baseTableSchemaName="car_shop"
-                                 referencedTableName="car" referencedColumnNames="car_id"
-                                 referencedTableSchemaName="car_shop"/>
-    </changeSet>
-
 </databaseChangeLog>

@@ -1,6 +1,6 @@
-package repository;
+package org.example.repository;
 
-import entity.Doctor;
+import org.example.entity.Doctor;
 
 import java.util.List;
 

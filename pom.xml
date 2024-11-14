@@ -11,10 +11,10 @@
     <properties>
         <lombok.version>1.18.34</lombok.version>
         <postgresql.version>42.7.4</postgresql.version>
-        <spring-web.version>6.1.14</spring-web.version>
+        <spring.version>5.3.37</spring.version>
         <hibernate.version>6.6.2.Final</hibernate.version>
         <liquibase.version>4.29.1</liquibase.version>
-
+        <javax.servlet.version>4.0.1</javax.servlet.version>
     </properties>
 
     <dependencies>
@@ -44,7 +44,15 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-            <version>${spring-web.version}</version>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <!-- Servlet API -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${javax.servlet.version}</version>
+            <scope>provided</scope>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.hibernate.orm/hibernate-core -->
@@ -59,6 +67,14 @@
             <artifactId>liquibase-core</artifactId>
             <version>${liquibase.version}</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
 
     </dependencies>
     <build>
