@@ -17,6 +17,7 @@ import java.util.Objects;
  */
 @Configuration
 @EnableWebMvc
+
 @ComponentScan(basePackages = "org.example")
 public class AppConfig {
 

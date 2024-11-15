@@ -1,0 +1,32 @@
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="clients-sicks-link-v.1.0" author="Alexandr Krylov">
+        <createTable tableName="clients_sicks">
+            <column name="client_id" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sick_id" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="client_id,sick_id"
+                       constraintName="pk_clients_sicks"
+                       tableName="clients_sicks"/>
+
+        <addForeignKeyConstraint baseTableName="clients_sicks"
+                                 baseColumnNames="client_id"
+                                 constraintName="fk_clients_sicks_clients"
+                                 referencedTableName="clients"
+                                 referencedColumnNames="client_id"/>
+
+        <addForeignKeyConstraint baseTableName="clients_sicks"
+                                 baseColumnNames="sick_id"
+                                 constraintName="fk_clients_sicks_sicks"
+                                 referencedTableName="sicks"
+                                 referencedColumnNames="sick_id"/>
+    </changeSet>
+</databaseChangeLog>

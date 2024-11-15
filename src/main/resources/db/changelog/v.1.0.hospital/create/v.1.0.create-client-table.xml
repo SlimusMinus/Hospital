@@ -17,6 +17,10 @@
             <column name="age" type="INTEGER">
                 <constraints nullable="false"/>
             </column>
+            <column name="doctor_id" type="INTEGER">
+                <constraints nullable="true" foreignKeyName="fk_clients_doctors"
+                             references="doctors(doctor_id)"/>
+            </column>
         </createTable>
     </changeSet>
 
