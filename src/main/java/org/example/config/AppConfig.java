@@ -1,5 +1,7 @@
 package org.example.config;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.Persistence;
 import liquibase.integration.spring.SpringLiquibase;
 import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;
 import org.springframework.context.annotation.Bean;
@@ -17,7 +19,6 @@ import java.util.Objects;
  */
 @Configuration
 @EnableWebMvc
-
 @ComponentScan(basePackages = "org.example")
 public class AppConfig {
 
@@ -67,4 +68,19 @@ public class AppConfig {
         liquibase.setChangeLog("classpath:db/changelog/changelog-master.xml");
         return liquibase;
     }
+
+    /**
+     * Метод создает и настраивает объект EntityManager для управления сущностями
+     * и взаимодействия с базой данных через JPA.
+     *
+     * <p>EntityManager создается на основе фабрики сущностей (EntityManagerFactory),
+     * настроенной для persistence unit с именем "hospital-db".</p>
+     *
+     * @return настроенный объект EntityManager
+     */
+    @Bean
+    public EntityManager entityManager() {
+        return Persistence.createEntityManagerFactory("hospital-db").createEntityManager();
+    }
+
 }

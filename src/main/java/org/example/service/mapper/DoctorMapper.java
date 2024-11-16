@@ -5,6 +5,8 @@ import org.example.entity.Doctor;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
+
 /**
  * Интерфейс DoctorMapper для преобразования сущности Doctor в DTO (Data Transfer Object) и наоборот.
  * Использует библиотеку MapStruct для автоматического маппинга.

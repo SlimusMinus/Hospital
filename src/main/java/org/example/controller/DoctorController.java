@@ -1,11 +1,10 @@
 package org.example.controller;
 
 import lombok.AllArgsConstructor;
-import org.example.entity.Doctor;
+import org.example.service.DoctorService;
 import org.example.service.dto.DoctorDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.example.service.DoctorService;
 
 import java.util.List;
 
@@ -36,7 +35,7 @@ public class DoctorController {
      * @param id идентификатор врача.
      * @return информация о враче в виде {@link ResponseEntity} с объектом {@link DoctorDTO}.
      */
-    @GetMapping("{/id}")
+    @GetMapping("/{id}")
     public ResponseEntity<DoctorDTO> findById(@PathVariable int id) {
         return doctorService.findById(id);
     }
@@ -69,7 +68,7 @@ public class DoctorController {
      * @param id идентификатор врача.
      * @return пустой ответ в виде {@link ResponseEntity<Void>}.
      */
-    @DeleteMapping("{/id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable int id) {
         return doctorService.delete(id);
     }

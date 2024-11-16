@@ -5,6 +5,9 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.entity.Sick;
+
+import java.util.List;
 
 /**
  * Data Transfer Object (DTO) для представления клиента.
@@ -22,4 +25,5 @@ public class ClientDTO {
     private String lastName;
     @NotNull
     private int age;
+    private List<Sick> sicks;
 }

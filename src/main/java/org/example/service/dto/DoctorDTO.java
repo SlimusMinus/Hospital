@@ -5,6 +5,10 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.entity.Client;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Data Transfer Object (DTO) для представления врача.
@@ -24,4 +28,5 @@ public class DoctorDTO {
     private int age;
     @NotBlank
     private String specification;
+    private List<Client> clients;
 }

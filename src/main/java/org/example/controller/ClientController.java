@@ -3,6 +3,7 @@ package org.example.controller;
 import lombok.AllArgsConstructor;
 import org.example.service.ClientService;
 import org.example.service.dto.ClientDTO;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +26,7 @@ public class ClientController {
      *
      * @return список всех клиентов в виде {@link ResponseEntity} с объектами {@link ClientDTO}.
      */
-    @GetMapping
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<ClientDTO>> findAll() {
         return service.findAll();
     }
