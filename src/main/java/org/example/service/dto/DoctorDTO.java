@@ -29,4 +29,11 @@ public class DoctorDTO {
     @NotBlank
     private String specification;
     private List<Client> clients;
+
+    public DoctorDTO(String firstName, String lastName, int age, String specification) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.specification = specification;
+    }
 }

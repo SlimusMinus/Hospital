@@ -26,4 +26,10 @@ public class ClientDTO {
     @NotNull
     private int age;
     private List<Sick> sicks;
+
+    public ClientDTO(String firstName, String lastName, int age) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+    }
 }

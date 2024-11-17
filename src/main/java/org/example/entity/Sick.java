@@ -1,6 +1,7 @@
 package org.example.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -42,6 +43,11 @@ public class Sick {
     private String stageSick;
 
     @ManyToMany(mappedBy = "sicks")
-    @JsonBackReference
-    private List<Client> clients = new ArrayList<>();
+    @JsonIgnoreProperties("sicks")
+    private List<Client> clients;
+
+    public Sick(String sickName, String stageSick) {
+        this.sickName = sickName;
+        this.stageSick = stageSick;
+    }
 }

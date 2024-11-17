@@ -1,6 +1,7 @@
 package org.example.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -52,11 +53,17 @@ public class Client {
     private Doctor doctor;
 
     @ManyToMany
-    @JsonManagedReference
+    @JsonIgnoreProperties("clients")
     @JoinTable(
             name = "clients_sicks",
             joinColumns = @JoinColumn(name = "client_id"),
             inverseJoinColumns = @JoinColumn(name = "sick_id")
     )
-    private List<Sick> sicks = new ArrayList<>();
+    private List<Sick> sicks;
+
+    public Client(String firstName, String lastName, int age) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+    }
 }

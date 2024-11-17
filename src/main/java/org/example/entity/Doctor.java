@@ -44,4 +44,11 @@ public class Doctor {
     @OneToMany(mappedBy = "doctor")
     @JsonManagedReference
     private List<Client> clients;
+
+    public Doctor(String firstName, String lastName, int age, String specification) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.specification = specification;
+    }
 }
