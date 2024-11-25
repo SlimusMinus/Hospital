@@ -4,7 +4,7 @@
                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
     <changeSet id="client-initial-v.1.0" author="Alexandr Krylov">
-        <createTable tableName="clients">
+        <createTable tableName="client">
             <column name="client_id" type="INTEGER">
                 <constraints primaryKey="true"/>
             </column>

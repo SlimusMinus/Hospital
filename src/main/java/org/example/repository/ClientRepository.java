@@ -1,11 +1,11 @@
 package org.example.repository;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.EntityTransaction;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.entity.Client;
-import org.example.entity.Doctor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -52,7 +52,7 @@ public class ClientRepository implements CRUDRepository<Client> {
     @Override
     public Client findById(int id) {
         log.info("Вызов метода findById для поиска клиента с id: {}", id);
-        String jpql = "SELECT c FROM Client c LEFT JOIN FETCH c.sicks WHERE c.clientId = :id";
+        String jpql = "SELECT c FROM Client c LEFT JOIN FETCH c.sicks WHERE c.id = :id";
         try {
             Client client = entityManager.createQuery(jpql, Client.class)
                     .setParameter("id", id)
@@ -79,12 +79,13 @@ public class ClientRepository implements CRUDRepository<Client> {
             transaction.begin();
             entityManager.persist(client);
             transaction.commit();
-            log.info("Клиент успешно сохранен с id: {}", client.getClientId());
+            log.info("Клиент успешно сохранен с id: {}", client.getId());
         } catch (Exception e) {
             log.error("Ошибка при сохранении клиента: {}", e.getMessage());
             if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
                 log.warn("Транзакция откатилась");
+                throw new EntityNotFoundException(e.getMessage());
             }
         }
         return client;
@@ -105,12 +106,13 @@ public class ClientRepository implements CRUDRepository<Client> {
             transaction.begin();
             entityManager.merge(client);
             transaction.commit();
-            log.info("Клиент успешно обновлен с id: {}", client.getClientId());
+            log.info("Клиент успешно обновлен с id: {}", client.getId());
         } catch (Exception e) {
             log.error("Ошибка при обновлении клиента: {}", e.getMessage());
             if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
                 log.warn("Транзакция откатилась");
+                throw new EntityNotFoundException(e.getMessage());
             }
         }
         return client;
@@ -140,6 +142,7 @@ public class ClientRepository implements CRUDRepository<Client> {
             if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
                 log.warn("Транзакция откатилась");
+                throw new EntityNotFoundException(e.getMessage());
             }
         }
         return false;

@@ -8,7 +8,7 @@
     <changeSet  author="doctor-sequence-v.1.0"  id="createSequence-example">
         <addAutoIncrement
                 columnName="doctor_id"
-                tableName="doctors"
+                tableName="doctor"
                 startWith="1"
                 incrementBy="1"
                 columnDataType="INTEGER"/>
@@ -17,7 +17,7 @@
     <changeSet id="doctor-populate-v.1.0" author="Alexandr Krylov">
         <loadData
                 file="db/data/doctor-data.csv"
-                tableName="doctors"
+                tableName="doctor"
                 separator=",">
             <column name="first_name" type="string"/>
             <column name="last_name" type="string"/>

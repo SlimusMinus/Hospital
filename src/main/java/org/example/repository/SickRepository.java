@@ -1,6 +1,7 @@
 package org.example.repository;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.EntityTransaction;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,7 +35,7 @@ public class SickRepository implements CRUDRepository<Sick> {
     @Override
     public Sick findById(int id) {
         log.info("Вызов метода findById для поиска болезни с id: {}", id);
-        String jpql = "SELECT s FROM Sick s LEFT JOIN FETCH s.clients WHERE s.sickId = :id";
+        String jpql = "SELECT s FROM Sick s LEFT JOIN FETCH s.clients WHERE s.id = :id";
         try {
             Sick sick = entityManager.createQuery(jpql, Sick.class)
                     .setParameter("id", id)
@@ -61,7 +62,7 @@ public class SickRepository implements CRUDRepository<Sick> {
             transaction.begin();
             entityManager.persist(sick);
             transaction.commit();
-            log.info("Болезнь успешно сохранена с id: {}", sick.getSickId());
+            log.info("Болезнь успешно сохранена с id: {}", sick.getId());
         } catch (Exception e) {
             log.error("Ошибка при сохранении болезни: {}", e.getMessage());
             if (transaction != null && transaction.isActive()) {
@@ -86,13 +87,14 @@ public class SickRepository implements CRUDRepository<Sick> {
             transaction.begin();
             Sick updatedSick = entityManager.merge(sick);
             transaction.commit();
-            log.info("Болезнь успешно обновлена с id: {}", sick.getSickId());
+            log.info("Болезнь успешно обновлена с id: {}", sick.getId());
             return updatedSick;
         } catch (Exception e) {
             log.error("Ошибка при обновлении болезни: {}", e.getMessage());
             if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
                 log.warn("Транзакция откатилась");
+                throw new EntityNotFoundException(e.getMessage());
             }
         }
         return null;
@@ -122,6 +124,7 @@ public class SickRepository implements CRUDRepository<Sick> {
             if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
                 log.warn("Транзакция откатилась");
+                throw new EntityNotFoundException(e.getMessage());
             }
         }
         return false;

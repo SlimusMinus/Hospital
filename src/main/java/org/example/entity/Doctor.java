@@ -2,11 +2,14 @@ package org.example.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import java.util.Objects;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * Класс, представляющий сущность доктора в системе.
@@ -25,14 +28,15 @@ import java.util.List;
  */
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 @Entity
-@Table(name = "doctors")
+@Table(name = "doctor")
 public class Doctor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "doctor_id")
-    private int doctorId;
+    private int id;
     @Column(name = "first_name")
     private String firstName;
     @Column(name = "last_name")
@@ -41,8 +45,9 @@ public class Doctor {
     private int age;
     @Column(name = "specification")
     private String specification;
-    @OneToMany(mappedBy = "doctor")
+    @OneToMany(mappedBy = "doctor", cascade = CascadeType.DETACH)
     @JsonManagedReference
+    @ToString.Exclude
     private List<Client> clients;
 
     public Doctor(String firstName, String lastName, int age, String specification) {
@@ -50,5 +55,22 @@ public class Doctor {
         this.lastName = lastName;
         this.age = age;
         this.specification = specification;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Doctor doctor = (Doctor) o;
+        return id == doctor.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return id == 0 ? System.identityHashCode(this) : Objects.hashCode(id);
     }
 }

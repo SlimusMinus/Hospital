@@ -1,6 +1,7 @@
 package org.example.repository;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.EntityTransaction;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -79,7 +80,7 @@ public class DoctorRepository implements CRUDRepository<Doctor> {
             transaction.begin();
             entityManager.persist(doctor);
             transaction.commit();
-            log.info("Доктор успешно сохранен с id: {}", doctor.getDoctorId());
+            log.info("Доктор успешно сохранен с id: {}", doctor.getId());
         } catch (Exception e) {
             log.error("Ошибка при сохранении доктора: {}", e.getMessage());
             if (transaction != null && transaction.isActive()) {
@@ -104,12 +105,13 @@ public class DoctorRepository implements CRUDRepository<Doctor> {
             transaction.begin();
             entityManager.merge(doctor);
             transaction.commit();
-            log.info("Доктор успешно обновлен с id: {}", doctor.getDoctorId());
+            log.info("Доктор успешно обновлен с id: {}", doctor.getId());
         } catch (Exception e) {
             log.error("Ошибка при обновлении доктора: {}", e.getMessage());
             if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
                 log.warn("Транзакция откатилась");
+                throw new EntityNotFoundException(e.getMessage());
             }
         }
         return doctor;
@@ -139,6 +141,7 @@ public class DoctorRepository implements CRUDRepository<Doctor> {
             if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
                 log.warn("Транзакция откатилась");
+                throw new EntityNotFoundException(e.getMessage());
             }
         }
         return false;

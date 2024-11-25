@@ -7,7 +7,6 @@ import org.example.entity.Doctor;
 import org.example.repository.CRUDRepository;
 import org.example.service.dto.DoctorDTO;
 import org.example.service.mapper.DoctorMapper;
-import org.hibernate.Hibernate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -84,7 +83,7 @@ public class DoctorService {
     public ResponseEntity<DoctorDTO> save(DoctorDTO doctorDTO) {
         log.info("Вызов метода save для сохранения врача: {}", doctorDTO);
         Doctor savedDoctor = repository.save(DoctorMapper.INSTANCE.toDoctor(doctorDTO));
-        log.info("Врач успешно сохранен с id: {}", savedDoctor.getDoctorId());
+        log.info("Врач успешно сохранен с id: {}", savedDoctor.getId());
         return ResponseEntity.ok(DoctorMapper.INSTANCE.toDoctorDTO(savedDoctor));
     }
 
@@ -101,7 +100,7 @@ public class DoctorService {
             log.warn("Врач с id {} не найден для обновления", doctorDTO.getDoctorId());
             return ResponseEntity.notFound().build();
         }
-        log.info("Врач с id {} успешно обновлен", updatedDoctor.getDoctorId());
+        log.info("Врач с id {} успешно обновлен", updatedDoctor.getId());
         return ResponseEntity.ok(DoctorMapper.INSTANCE.toDoctorDTO(updatedDoctor));
     }
 

@@ -2,14 +2,15 @@ package org.example.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import java.util.Objects;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.List;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * Класс, представляющий сущность клиента в системе.
@@ -29,41 +30,61 @@ import java.util.List;
  */
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 @Entity
-@Table(name = "clients")
+@Table(name = "client")
 public class Client {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "client_id")
-    private int clientId;
 
-    @Column(name = "first_name")
-    private String firstName;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "client_id")
+  private int id;
 
-    @Column(name = "last_name")
-    private String lastName;
+  @Column(name = "first_name")
+  private String firstName;
 
-    @Column(name = "age")
-    private int age;
+  @Column(name = "last_name")
+  private String lastName;
 
-    @ManyToOne
-    @JoinColumn(name = "doctor_id")
-    @JsonBackReference
-    private Doctor doctor;
+  @Column(name = "age")
+  private int age;
 
-    @ManyToMany
-    @JsonIgnoreProperties("clients")
-    @JoinTable(
-            name = "clients_sicks",
-            joinColumns = @JoinColumn(name = "client_id"),
-            inverseJoinColumns = @JoinColumn(name = "sick_id")
-    )
-    private List<Sick> sicks;
+  @ManyToOne(cascade = CascadeType.DETACH)
+  @JoinColumn(name = "doctor_id")
+  @JsonBackReference
+  private Doctor doctor;
 
-    public Client(String firstName, String lastName, int age) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.age = age;
+  @ManyToMany(cascade = CascadeType.DETACH)
+  @JsonIgnoreProperties("clients")
+  @JoinTable(
+      name = "client_sick",
+      joinColumns = @JoinColumn(name = "client_id"),
+      inverseJoinColumns = @JoinColumn(name = "sick_id")
+  )
+  @ToString.Exclude
+  private List<Sick> sicks;
+
+  public Client(String firstName, String lastName, int age) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.age = age;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
     }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    Client client = (Client) o;
+    return id == client.id;
+  }
+
+  @Override
+  public int hashCode() {
+    return id == 0 ? System.identityHashCode(this) : Objects.hashCode(id);
+  }
 }

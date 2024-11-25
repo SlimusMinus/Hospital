@@ -58,7 +58,7 @@ class DoctorRepositoryTest extends TestContainers {
         entityManager.persist(DOCTOR_3);
         entityManager.getTransaction().commit();
 
-        Doctor foundDoctor = doctorRepository.findById(DOCTOR_3.getDoctorId());
+        Doctor foundDoctor = doctorRepository.findById(DOCTOR_3.getId());
 
         assertThat(foundDoctor)
                 .isNotNull()
@@ -91,7 +91,7 @@ class DoctorRepositoryTest extends TestContainers {
                 .extracting("lastName", "age", "specification")
                 .containsExactly("Johnson", 42, "Rheumatologist");
 
-        Doctor foundDoctor = entityManager.find(Doctor.class, UPDATE_DOCTOR.getDoctorId());
+        Doctor foundDoctor = entityManager.find(Doctor.class, UPDATE_DOCTOR.getId());
         assertThat(foundDoctor)
                 .extracting("lastName", "age", "specification")
                 .containsExactly("Johnson", 42, "Rheumatologist");
@@ -101,7 +101,7 @@ class DoctorRepositoryTest extends TestContainers {
     @DisplayName("Должен сохранить нового доктора")
     void save_shouldPersistDoctor() {
         Doctor savedDoctor = doctorRepository.save(SAVE_DOCTOR);
-        Doctor foundDoctor = entityManager.find(Doctor.class, savedDoctor.getDoctorId());
+        Doctor foundDoctor = entityManager.find(Doctor.class, savedDoctor.getId());
         assertThat(foundDoctor)
                 .isNotNull()
                 .extracting("firstName")
@@ -114,9 +114,9 @@ class DoctorRepositoryTest extends TestContainers {
         entityManager.getTransaction().begin();
         entityManager.persist(DELETE_DOCTOR);
         entityManager.getTransaction().commit();
-        boolean deleted = doctorRepository.delete(DELETE_DOCTOR.getDoctorId());
+        boolean deleted = doctorRepository.delete(DELETE_DOCTOR.getId());
         assertThat(deleted).isTrue();
-        Doctor foundDoctor = entityManager.find(Doctor.class, DELETE_DOCTOR.getDoctorId());
+        Doctor foundDoctor = entityManager.find(Doctor.class, DELETE_DOCTOR.getId());
         assertThat(foundDoctor).isNull();
     }
 }

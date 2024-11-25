@@ -54,7 +54,7 @@ public class SickService {
     public ResponseEntity<Sick> save(Sick sick) {
         log.info("Вызов метода save для сохранения болезни: {}", sick);
         Sick savedSick = repository.save(sick);
-        log.info("Болезнь успешно сохранена с id: {}", savedSick.getSickId());
+        log.info("Болезнь успешно сохранена с id: {}", savedSick.getId());
         return ResponseEntity.ok(savedSick);
     }
 
@@ -68,10 +68,10 @@ public class SickService {
         log.info("Вызов метода update для обновления болезни: {}", sick);
         Sick updatedSick = repository.update(sick);
         if (updatedSick == null) {
-            log.warn("Болезнь с id {} не найдена для обновления", sick.getSickId());
+            log.warn("Болезнь с id {} не найдена для обновления", sick.getId());
             return ResponseEntity.notFound().build();
         }
-        log.info("Болезнь с id {} успешно обновлена", sick.getSickId());
+        log.info("Болезнь с id {} успешно обновлена", sick.getId());
         return ResponseEntity.ok(updatedSick);
     }
 

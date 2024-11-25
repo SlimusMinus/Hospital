@@ -60,7 +60,7 @@ class ClientRepositoryTest extends TestContainers {
         entityManager.persist(CLIENT_3);
         entityManager.getTransaction().commit();
 
-        Client foundClient = clientRepository.findById(CLIENT_3.getClientId());
+        Client foundClient = clientRepository.findById(CLIENT_3.getId());
 
         assertThat(foundClient).isNotNull();
         assertThat("Alice").isEqualTo(foundClient.getFirstName());
@@ -90,7 +90,7 @@ class ClientRepositoryTest extends TestContainers {
         assertThat("Pol").isEqualTo(updatedClient.getFirstName());
         assertThat("Smith").isEqualTo(updatedClient.getLastName());
 
-        Client foundClient = entityManager.find(Client.class, UPDATE_CLIENT.getClientId());
+        Client foundClient = entityManager.find(Client.class, UPDATE_CLIENT.getId());
         assertThat("Pol").isEqualTo(foundClient.getFirstName());
         assertThat("Smith").isEqualTo(foundClient.getLastName());
     }
@@ -100,7 +100,7 @@ class ClientRepositoryTest extends TestContainers {
     void save_shouldPersistClient() {
         Client savedClient = clientRepository.save(SAVE_CLIENT);
 
-        Client foundClient = entityManager.find(Client.class, savedClient.getClientId());
+        Client foundClient = entityManager.find(Client.class, savedClient.getId());
         Assertions.assertNotNull(foundClient);
         assertThat(foundClient).isNotNull();
         assertThat("Tom").isEqualTo(foundClient.getFirstName());
@@ -113,10 +113,10 @@ class ClientRepositoryTest extends TestContainers {
         entityManager.persist(DELETE_CLIENT);
         entityManager.getTransaction().commit();
 
-        boolean deleted = clientRepository.delete(DELETE_CLIENT.getClientId());
+        boolean deleted = clientRepository.delete(DELETE_CLIENT.getId());
 
         assertThat(deleted).isTrue();
-        Client foundClient = entityManager.find(Client.class, DELETE_CLIENT.getClientId());
+        Client foundClient = entityManager.find(Client.class, DELETE_CLIENT.getId());
         assertThat(foundClient).isNull();
     }
 }

@@ -94,7 +94,7 @@ class SickRepositoryTest extends TestContainers {
     void save_shouldPersistSick() {
         Sick savedSick = sickRepository.save(SAVE_SICK);
 
-        Sick foundSick = entityManager.find(Sick.class, savedSick.getSickId());
+        Sick foundSick = entityManager.find(Sick.class, savedSick.getId());
         assertThat(foundSick).isNotNull();
         assertThat(foundSick.getSickName()).isEqualTo("Flu");
     }

@@ -83,7 +83,7 @@ public class ClientService {
     public ResponseEntity<ClientDTO> save(ClientDTO clientDTO) {
         log.info("Вызов метода save для сохранения клиента: {}", clientDTO);
         Client savedClient = repository.save(ClientMapper.INSTANCE.clientDTOToClient(clientDTO));
-        log.info("Клиент успешно сохранен с id: {}", savedClient.getClientId());
+        log.info("Клиент успешно сохранен с id: {}", savedClient.getId());
         return ResponseEntity.ok(ClientMapper.INSTANCE.clientToClientDTO(savedClient));
     }
 
@@ -100,7 +100,7 @@ public class ClientService {
             log.warn("Клиент с id {} не найден для обновления", clientDTO.getClientId());
             return ResponseEntity.notFound().build();
         }
-        log.info("Клиент с id {} успешно обновлен", updatedClient.getClientId());
+        log.info("Клиент с id {} успешно обновлен", updatedClient.getId());
         return ResponseEntity.ok(ClientMapper.INSTANCE.clientToClientDTO(updatedClient));
     }
 
