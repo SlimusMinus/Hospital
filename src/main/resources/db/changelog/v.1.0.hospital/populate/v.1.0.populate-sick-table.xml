@@ -6,7 +6,7 @@
     <changeSet  author="sick-sequence-v.1.0"  id="createSequence-example">
         <addAutoIncrement
                 columnName="sick_id"
-                tableName="sicks"
+                tableName="sick"
                 startWith="1"
                 incrementBy="1"
                 columnDataType="INTEGER"/>
@@ -15,7 +15,7 @@
     <changeSet id="role-populate-v.1.0" author="Alexandr Krylov">
         <loadData
                 file="db/data/sick-data.csv"
-                tableName="sicks"
+                tableName="sick"
                 separator=",">
             <column name="sick_name" type="string"/>
             <column name="stage_sick" type="string"/>

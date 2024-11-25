@@ -1,0 +1,16 @@
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="clients-sicks-populate-v.1.0" author="Alexandr Krylov">
+        <loadData
+                file="db/data/clients_sicks-data.csv"
+                tableName="client_sick"
+                separator=",">
+            <column name="client_id" type="numeric"/>
+            <column name="sick_id" type="numeric"/>
+        </loadData>
+    </changeSet>
+
+</databaseChangeLog>

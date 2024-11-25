@@ -6,7 +6,7 @@
    https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
     <changeSet id="doctor-initial-v.1.0" author="Alexandr Krylov">
-        <createTable tableName="doctors">
+        <createTable tableName="doctor">
             <column name="doctor_id" type="INTEGER">
                 <constraints primaryKey="true"/>
             </column>

@@ -1,0 +1,47 @@
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+             http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+             version="2.1">
+
+    <persistence-unit name="test-persistence-unit" transaction-type="RESOURCE_LOCAL">
+        <class>org.example.entity.Doctor</class>
+        <class>org.example.entity.Client</class>
+        <class>org.example.entity.Sick</class>
+
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/testdb" />
+            <property name="javax.persistence.jdbc.user" value="testuser" />
+            <property name="javax.persistence.jdbc.password" value="testpass" />
+
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="update" />
+
+            <property name="hibernate.show_sql" value="true" />
+            <property name="hibernate.format_sql" value="true" />
+        </properties>
+
+    </persistence-unit>
+
+    <persistence-unit name="test-persistence-unit2" transaction-type="RESOURCE_LOCAL">
+        <class>org.example.entity.Doctor</class>
+        <class>org.example.entity.Client</class>
+        <class>org.example.entity.Sick</class>
+
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/testdb2" />
+            <property name="javax.persistence.jdbc.user" value="testuser2" />
+            <property name="javax.persistence.jdbc.password" value="testpass2" />
+
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="update" />
+
+            <property name="hibernate.show_sql" value="true" />
+            <property name="hibernate.format_sql" value="true" />
+        </properties>
+
+    </persistence-unit>
+
+</persistence>
